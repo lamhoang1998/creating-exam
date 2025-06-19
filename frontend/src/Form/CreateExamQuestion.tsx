@@ -22,16 +22,16 @@ function CreateExamQuestion() {
 	}
 
 	return (
-		<div>
+		<div className={style.createExam}>
 			<h2>Fill the form to create questions. choose one </h2>
-			<form>
+			<div className={style.createExamForm}>
 				<div className={style.createExamSwitch}>
 					<span onClick={handleMultipleChoice}>Multiple choice</span>
 					<span onClick={handleProblemSolving}>Problem solving</span>
 				</div>
 				{multipleChoice && <MultipleChoice />}
 				{problemSolving && <ProblemSolvingQuestion />}
-			</form>
+			</div>
 		</div>
 	);
 }

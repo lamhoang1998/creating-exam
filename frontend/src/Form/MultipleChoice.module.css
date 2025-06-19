@@ -1,0 +1,30 @@
+.multipleChoice {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.multipleChoiceQuestionLabel {
+	display: block;
+	margin-top: 10px;
+}
+
+.multipleChoiceQuestionInput {
+	width: 80%;
+	display: block;
+	margin-top: 8px;
+	height: 28px;
+}
+
+.multipleChoiceAnswerLabel {
+	display: block;
+	margin-top: 10px;
+}
+
+.multipleChoiceAnswerInput {
+	display: block;
+	width: 80%;
+	margin-top: 8px;
+	height: 28px;
+}
