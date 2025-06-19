@@ -28,3 +28,7 @@
 	margin-top: 8px;
 	height: 28px;
 }
+
+.multipleChoiceInputError {
+	color: rgb(234, 28, 28);
+}

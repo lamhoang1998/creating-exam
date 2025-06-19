@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 const multipleChoiceSchema = z.object({
-	question: z.string(),
-	answerOne: z.string(),
-	answerTwo: z.string(),
-	answerThree: z.string(),
-	answerFour: z.string(),
+	question: z.string().min(1, { message: "please enter the question!" }),
+	answerOne: z.string().min(1, { message: "please enter the first answer!" }),
+	answerTwo: z.string().min(1, { message: "please enter the second answer!" }),
+	answerThree: z.string().min(1, { message: "please enter the third answer!" }),
+	answerFour: z.string().min(1, { message: "please enter the fourth answer!" }),
 });
 
 type MultipleChoiceSchema = z.infer<typeof multipleChoiceSchema>;
