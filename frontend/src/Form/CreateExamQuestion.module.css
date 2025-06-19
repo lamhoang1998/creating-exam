@@ -8,5 +8,11 @@
 }
 
 .createExamSwitch {
-	margin-left: 4px;
+	display: flex;
+	gap: 8px;
+	margin-bottom: 8px;
+}
+
+.createExamSwitch span {
+	cursor: pointer;
 }
