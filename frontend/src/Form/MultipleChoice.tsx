@@ -6,6 +6,7 @@ import {
 import styles from "./MultipleChoice.module.css";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useStore, type QuestionAndAnswer } from "../store/store";
 
 function MultipleChoice() {
 	const {
@@ -18,8 +19,11 @@ function MultipleChoice() {
 		defaultValues: multipleChoiceDefaultValues,
 	});
 
+	const updateExam = useStore((state) => state.updateExam);
+
 	const onSubmit = handleSubmit((data) => {
 		console.log(data);
+		updateExam(data);
 	});
 
 	return (

@@ -2,6 +2,7 @@ import { useState } from "react";
 import style from "./CreateExamQuestion.module.css";
 import MultipleChoice from "./MultipleChoice";
 import ProblemSolvingQuestion from "./ProblemSolvingQuestion";
+import Exam from "../Exam/Exam";
 
 function CreateExamQuestion() {
 	const [multipleChoice, setMultipleChoice] = useState(true);
@@ -32,6 +33,7 @@ function CreateExamQuestion() {
 				{multipleChoice && <MultipleChoice />}
 				{problemSolving && <ProblemSolvingQuestion />}
 			</div>
+			<Exam />
 		</div>
 	);
 }
