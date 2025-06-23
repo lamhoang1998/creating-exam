@@ -7,6 +7,7 @@ import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { saltRounds } from 'src/utils/auth.utils';
 import { LoginDto } from './dto/login-auth.dto';
+import e from 'express';
 @Injectable()
 export class AuthService {
   constructor(
@@ -58,18 +59,34 @@ export class AuthService {
         password: true,
       },
     });
+
+    if (!userExists)
+      throw new BadRequestException(
+        'Email does not exist, please register first',
+      );
+
+    const passHash = userExists.password as string;
+    const isPassword = bcrypt.compareSync(password, passHash);
+    console.log({ isPassword });
+    if (!isPassword) throw new BadRequestException(`Mật khẩu không chính xác`);
+
+    const tokens = this.createTokens(userExists);
+
+    return tokens;
   }
+
+  async refreshToken(req: Request) {}
 
   createTokens(userExists: UserExists) {
     const accessToken = this.jwtService.sign(
-      { userId: userExists.userId },
+      { userId: userExists?.userId },
       {
         secret: this.configService.get<string>('ACCESS_TOKEN_SECRET'),
         expiresIn: this.configService.get<string>('ACCESS_TOKEN_EXPIRED'),
       },
     );
     const refreshToken = this.jwtService.sign(
-      { userId: userExists.userId },
+      { userId: userExists?.userId },
       {
         secret: this.configService.get<string>('REFRESH_TOKEN_SECRET'),
         expiresIn: this.configService.get<string>('REFRESH_TOKEN_EXPIRED'),

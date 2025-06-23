@@ -1,7 +1,7 @@
 export type UserExists = {
-  password: string;
   userId: number;
-};
+  password: string | null;
+} | null;
 
 export type UserPayload = {
   userId: number;
