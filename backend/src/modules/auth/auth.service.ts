@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { PrismaService } from 'src/common/prisma/init.prisma';
 import { RegisterDto } from './dto/register-auth.dto';
 import { UserExists } from 'src/common/types/users.types';
@@ -75,7 +79,37 @@ export class AuthService {
     return tokens;
   }
 
-  async refreshToken(req: Request) {}
+  async refreshToken(req: Request) {
+    const refreshToken = req.headers[`authorization`]?.split(' ')[1] as string;
+
+    const accessToken = req.headers[`x-access-token`] as string;
+
+    if (!refreshToken) throw new UnauthorizedException();
+    if (!accessToken) throw new UnauthorizedException();
+
+    const decodedAccessToken = this.jwtService.verify(accessToken, {
+      secret: this.configService.get<string>('ACCESS_TOKEN_SECRET'),
+      ignoreExpiration: true,
+    });
+
+    const decodedRefreshToken = this.jwtService.verify(refreshToken, {
+      secret: this.configService.get<string>('REFRESH_TOKEN_SECRET'),
+    });
+
+    if (decodedRefreshToken.userId !== decodedAccessToken.userId)
+      throw new UnauthorizedException();
+
+    const user = await this.prisma.users.findUnique({
+      where: {
+        userId: decodedRefreshToken.userId,
+      },
+      select: { userId: true, password: true },
+    });
+
+    const tokens = this.createTokens(user);
+
+    return tokens;
+  }
 
   createTokens(userExists: UserExists) {
     const accessToken = this.jwtService.sign(
