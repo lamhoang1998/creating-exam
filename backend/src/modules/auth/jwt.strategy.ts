@@ -6,21 +6,6 @@ import { PrismaService } from 'src/common/prisma/init.prisma';
 import { User, UserPayload } from 'src/common/types/users.types';
 import 'passport';
 
-declare global {
-  namespace Express {
-    interface User {
-      userId: number;
-      email: string | null;
-      fullName: string | null;
-      phoneNumber: string | null;
-      avatar: string | null;
-      role_id: number | null;
-      created_at: Date | null;
-      updated_at: Date | null;
-    }
-  }
-}
-
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'protect') {
   constructor(
