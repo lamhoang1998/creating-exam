@@ -2,3 +2,5 @@
 
 //protect route:
 //route not having @Public() decorator will require token. we do need to use JwtAuthGuard in main.ts at first to run canActive. JwtAuthGuard object is like a middleware running before the method in controller file to check if token is required, it will check if Is_public is used, if not it will run the passport strategy file to validate token then extract user from database and send it back down to the handleRequest file to integrate it into the express request object.
+
+// declare global type for req.user extends the User type available in passport index.d.ts by the user type that we specified or we will got overridden by it and it will cause bug when we can't retrive any properties of the user object.
