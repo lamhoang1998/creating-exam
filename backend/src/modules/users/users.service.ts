@@ -16,6 +16,8 @@ export class UsersService {
       },
     });
 
+    console.log('userInfo', userInfo);
+
     return userInfo;
   }
 }
