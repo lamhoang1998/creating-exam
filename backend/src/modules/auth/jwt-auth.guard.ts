@@ -11,6 +11,7 @@ import { JsonWebTokenError, TokenExpiredError } from '@nestjs/jwt';
 import { AuthGuard } from '@nestjs/passport';
 
 import { IS_PUBLIC_KEY } from 'src/common/decorator/public.decorator';
+import { User } from 'src/common/types/users.types';
 
 @Injectable()
 export class JwtAuthGuard extends AuthGuard('protect') {
@@ -29,9 +30,6 @@ export class JwtAuthGuard extends AuthGuard('protect') {
   }
 
   handleRequest(err, user, info) {
-    console.log({ err });
-    console.log({ info });
-    console.log({ user });
     if (info instanceof TokenExpiredError) throw new ForbiddenException();
 
     if (info instanceof JsonWebTokenError) throw new UnauthorizedException();

@@ -1,12 +1,21 @@
 import { Injectable } from '@nestjs/common';
-import { Request } from 'express';
 import { PrismaService } from 'src/common/prisma/init.prisma';
+import { Request as ExpressRequest } from 'express-serve-static-core';
 
 @Injectable()
 export class UsersService {
   constructor(public prisma: PrismaService) {}
 
-  async getUserInfo(req: Request) {
-    console.log({ req: req.user });
+  async getUserInfo(req: Request & ExpressRequest) {
+    const userInfo = this.prisma.users.findUnique({
+      where: {
+        userId: req.user?.userId,
+      },
+      omit: {
+        password: true,
+      },
+    });
+
+    return userInfo;
   }
 }
