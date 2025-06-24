@@ -28,5 +28,5 @@ export class RegisterDto {
   })
   @IsOptional()
   @IsNumber()
-  role_id: number;
+  roleId: number;
 }

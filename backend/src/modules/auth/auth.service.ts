@@ -11,7 +11,6 @@ import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { saltRounds } from 'src/utils/auth.utils';
 import { LoginDto } from './dto/login-auth.dto';
-import e from 'express';
 @Injectable()
 export class AuthService {
   constructor(
@@ -41,7 +40,7 @@ export class AuthService {
         fullName: registerBody.fullName,
         password: hashPassword,
         phoneNumber: registerBody.phoneNumber,
-        ...(registerBody.role_id && { role_id: registerBody.role_id }),
+        ...(registerBody.roleId && { roleId: registerBody.roleId }),
       },
       omit: {
         password: true,
