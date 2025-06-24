@@ -3,16 +3,19 @@ import { AuthService } from './auth.service';
 import { RegisterDto } from './dto/register-auth.dto';
 import { LoginDto } from './dto/login-auth.dto';
 import { ResponseMessage } from 'src/common/decorator/response-message.decorator';
+import { Public } from 'src/common/decorator/public.decorator';
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @Public()
   @Post('register')
   async register(@Body() registerBody: RegisterDto) {
     return this.authService.register(registerBody);
   }
 
+  @Public()
   @Post('login')
   @ResponseMessage(`successfully signed in`)
   async login(@Body() loginBody: LoginDto) {
