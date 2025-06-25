@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
 import { useLoginMutation } from "../../common/mutations/auth/auth.mutations";
 import { setAccessToken, setRefreshToken } from "../../helpers/auth.helper";
+import { toast } from "react-toastify";
 
 function Login() {
 	const navigate = useNavigate();
@@ -43,7 +44,6 @@ function Login() {
 							type="text"
 							id="username"
 							placeholder="Enter your username"
-							required
 						/>
 					</div>
 					<div className={styles.formGroup}>
@@ -52,7 +52,6 @@ function Login() {
 							type="password"
 							id="password"
 							placeholder="Enter your password"
-							required
 						/>
 					</div>
 					<button type="submit" className={styles.loginButton}>
