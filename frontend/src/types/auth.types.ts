@@ -1,3 +1,5 @@
+import type { TRes } from "./app.types";
+
 export type RefreshToken = {
 	status: string;
 	message: string;
@@ -6,3 +8,15 @@ export type RefreshToken = {
 		refreshToken: string;
 	};
 };
+
+export type LoginBody = {
+	email: string;
+	passWord: string;
+};
+
+export type LoginMetaData = {
+	accessToken: string;
+	refreshToken: string;
+};
+
+export type LoginResult = TRes<LoginMetaData>;
