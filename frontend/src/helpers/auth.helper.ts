@@ -1,3 +1,5 @@
+import rootRouter from "../routers/rootRouter";
+
 export function getAccessToken() {
 	return localStorage.getItem("accessToken");
 }
@@ -12,4 +14,11 @@ export function getRefreshToken() {
 
 export function setRefreshToken(data: string) {
 	localStorage.setItem("refreshToken", data);
+}
+
+export function logOut() {
+	localStorage.removeItem(`accessToken`);
+	localStorage.removeItem(`refreshToken`);
+
+	rootRouter.navigate(`/login`);
 }

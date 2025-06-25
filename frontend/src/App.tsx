@@ -1,14 +1,8 @@
-import "./App.css";
-import CreateExamQuestion from "./Form/CreateExamQuestion";
-import Login from "./pages/Login/Login";
-import Register from "./pages/Register/Register";
+import { RouterProvider } from "react-router-dom";
+import rootRouter from "./routers/rootRouter";
 
 function App() {
-	return (
-		<>
-			<Register />
-		</>
-	);
+	return <RouterProvider router={rootRouter} />;
 }
 
 export default App;
