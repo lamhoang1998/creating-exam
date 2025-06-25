@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { ValidationPipe } from '@nestjs/common';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { User as AuthType } from './common/types/users.types';
+import { ResponseSuccessInterceptor } from './common/interceptors/response-success.interceptor';
 
 declare global {
   namespace Express {
@@ -25,6 +26,7 @@ async function bootstrap() {
   );
 
   app.useGlobalGuards(new JwtAuthGuard(reflector));
+  app.useGlobalInterceptors(new ResponseSuccessInterceptor(reflector));
 
   await app.listen(process.env.PORT ?? 3001);
 }
