@@ -24,7 +24,8 @@ function Login() {
 		console.log(data);
 		login.mutate(data, {
 			onSuccess: (data) => {
-				console.log("access token", data.data.);
+				setAccessToken(data.data.metaData.accessToken);
+				setRefreshToken(data.data.metaData.refreshToken);
 
 				toast.success("successfully signed in");
 

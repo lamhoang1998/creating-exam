@@ -13,7 +13,7 @@ export const registerSchema = z.object({
 			{ message: "Email is not valid" }
 		),
 	phoneNumber: z.string().min(1, { message: "please enter your phone number" }),
-	passWord: z.string().min(1, { message: "enter password please!" }),
+	password: z.string().min(1, { message: "enter password please!" }),
 });
 
 export type RegisterSchema = z.infer<typeof registerSchema>;

@@ -20,3 +20,18 @@ export type LoginMetaData = {
 };
 
 export type LoginResult = TRes<LoginMetaData>;
+
+export type RegisterBody = {
+	email: string;
+	password: string;
+};
+type RegisterMetaData = {
+	userId: number;
+	email: string;
+	fullName: string;
+	avatar: any;
+	createdAt: string;
+	updatedAt: string;
+};
+
+export type RegisterResult = TRes<RegisterMetaData>;

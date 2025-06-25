@@ -2,17 +2,30 @@ import { createBrowserRouter } from "react-router-dom";
 import RootPage from "../pages/Rootpage/RootPage";
 import Login from "../pages/Login/Login";
 import DashBoard from "../pages/DashBoard/DashBoard";
+import Register from "../pages/Register/Register";
 
 const rootRouter = createBrowserRouter([
 	{
 		path: "/dashboard",
-		element: <DashBoard />,
+		element: (
+			<RootPage>
+				<DashBoard />
+			</RootPage>
+		),
 	},
 	{
 		path: "/login",
 		element: (
 			<RootPage>
 				<Login />
+			</RootPage>
+		),
+	},
+	{
+		path: "/register",
+		element: (
+			<RootPage>
+				<Register />
 			</RootPage>
 		),
 	},
