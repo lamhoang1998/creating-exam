@@ -11,7 +11,7 @@ export const loginSchema = z.object({
 			},
 			{ message: "Email is not valid" }
 		),
-	passWord: z.string().min(1, { message: "enter password please!" }),
+	password: z.string().min(1, { message: "enter password please!" }),
 });
 
 export type LoginSchema = z.infer<typeof loginSchema>;

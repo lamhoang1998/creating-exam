@@ -7,7 +7,7 @@ export type TRes<T> = {
 
 export type LoginBody = {
 	email: string;
-	passWord: string;
+	password: string;
 };
 
 export type LoginMetaData = {

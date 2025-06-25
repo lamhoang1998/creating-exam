@@ -21,14 +21,14 @@ function Login() {
 	const login = useLoginMutation();
 
 	const onSubmit = handleSubmit((data) => {
+		console.log(data);
 		login.mutate(data, {
 			onSuccess: (data) => {
-				setAccessToken(data.data.metaData.accessToken);
-				setRefreshToken(data.data.metaData.refreshToken);
+				console.log("access token", data.data.);
 
 				toast.success("successfully signed in");
 
-				navigate("/");
+				navigate("/dashboard");
 			},
 		});
 	});
@@ -37,23 +37,32 @@ function Login() {
 		<div className={styles.appContainer}>
 			<div className={styles.loginCard}>
 				<h2>Login</h2>
-				<form>
+				<form onSubmit={onSubmit}>
 					<div className={styles.formGroup}>
 						<label htmlFor="username">Username</label>
 						<input
 							type="text"
 							id="username"
 							placeholder="Enter your username"
+							{...register("email")}
 						/>
 					</div>
+					{errors.email && (
+						<span className="text-red-500">{errors.email.message}</span>
+					)}
+
 					<div className={styles.formGroup}>
 						<label htmlFor="password">Password</label>
 						<input
 							type="password"
 							id="password"
 							placeholder="Enter your password"
+							{...register("password")}
 						/>
 					</div>
+					{errors.password && (
+						<span className="text-red-500">{errors.password.message}</span>
+					)}
 					<button type="submit" className={styles.loginButton}>
 						Log In
 					</button>

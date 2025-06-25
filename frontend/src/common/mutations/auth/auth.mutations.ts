@@ -8,5 +8,8 @@ export function useLoginMutation() {
 		mutationFn: (data: LoginBody) => {
 			return Api.post<LoginResult>(ENDPOINT.AUTH.LOGIN, data);
 		},
+		onError: (error) => {
+			console.error("Login mutation failed:", error);
+		},
 	});
 }

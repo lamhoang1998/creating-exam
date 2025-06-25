@@ -1,5 +1,12 @@
-function Rootpage() {
-	return <div>Rootpage</div>;
+import type { ReactNode } from "react";
+
+type Props = {
+	children: ReactNode;
+	protect?: boolean;
+};
+
+function RootPage({ children, protect = false }: Props) {
+	return <div>{children}</div>;
 }
 
-export default Rootpage;
+export default RootPage;

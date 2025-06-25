@@ -11,7 +11,7 @@ export type RefreshToken = {
 
 export type LoginBody = {
 	email: string;
-	passWord: string;
+	password: string;
 };
 
 export type LoginMetaData = {
