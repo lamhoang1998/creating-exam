@@ -23,6 +23,7 @@ export class AuthController {
     return this.authService.login(loginBody);
   }
 
+  @Public()
   @Post(`refresh-token`)
   async refreshToken(@Req() req: Request) {
     return this.authService.refreshToken(req);
