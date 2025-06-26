@@ -12,7 +12,7 @@ import Answers from "../pages/Answers/Answers";
 const rootRouter = createBrowserRouter([
 	{
 		path: "/",
-		element: <Home />,
+		element: <AdminLayout />,
 	},
 	{
 		path: "/admin",

@@ -1,0 +1,87 @@
+.header {
+	background-color: white;
+	border-bottom: 1px solid #e5e7eb;
+	padding: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	grid-row: 1;
+	grid-column: 2;
+}
+
+.title {
+	font-size: 1.5rem;
+	font-weight: 600;
+	margin: 0;
+	color: #111827;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+.welcomeText {
+	color: #374151;
+	font-weight: 500;
+}
+
+.logoutButton {
+	background-color: #3b82f6;
+	color: white;
+	padding: 0.5rem 1rem;
+	border: none;
+	border-radius: 0.375rem;
+	cursor: pointer;
+	font-weight: 500;
+	transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.logoutButton:hover {
+	background-color: #2563eb;
+}
+
+.logoutButton:active {
+	transform: translateY(1px);
+}
+
+.logoutButton:focus {
+	outline: none;
+	box-shadow: 0 0 0 2px #3b82f6, 0 0 0 4px rgba(59, 130, 246, 0.2);
+}
+
+@media (max-width: 768px) {
+	.header {
+		grid-row: 2;
+		grid-column: 1;
+		padding: 0.75rem;
+	}
+
+	.title {
+		font-size: 1.25rem;
+	}
+
+	.actions {
+		gap: 0.5rem;
+	}
+
+	.welcomeText {
+		display: none;
+	}
+
+	.logoutButton {
+		padding: 0.5rem 0.75rem;
+		font-size: 0.875rem;
+	}
+}
+
+@media (max-width: 480px) {
+	.header {
+		padding: 0.5rem;
+	}
+
+	.title {
+		font-size: 1.125rem;
+	}
+}
