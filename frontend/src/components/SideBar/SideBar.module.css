@@ -125,3 +125,9 @@
 .sidebar.collapsed {
 	display: none;
 }
+
+@media (max-width: 768px) {
+	.sidebar {
+		display: none;
+	}
+}

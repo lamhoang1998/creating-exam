@@ -27,7 +27,7 @@
 }
 
 /* Responsive styles */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
 	.adminLayOutContainer {
 		grid-template-columns: 70px 1fr;
 	}
@@ -45,5 +45,14 @@
 
 	.sidebar.collapsed ~ .outletContainer {
 		grid-column: 1 / span 2;
+	}
+} */
+
+@media (max-width: 768px) {
+	.adminLayOutContainer .outletContainer {
+		grid-column-start: 1;
+		grid-column-end: 3;
+		grid-row-start: 2;
+		grid-row-end: 3;
 	}
 }

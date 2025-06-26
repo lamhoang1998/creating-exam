@@ -74,3 +74,12 @@
 	outline: none;
 	box-shadow: 0 0 0 2px #3b82f6, 0 0 0 4px rgba(59, 130, 246, 0.2);
 }
+
+@media (max-width: 768px) {
+	.header {
+		grid-column-start: 1;
+		grid-column-end: 3;
+		grid-row-start: 1;
+		grid-row-end: 2;
+	}
+}
