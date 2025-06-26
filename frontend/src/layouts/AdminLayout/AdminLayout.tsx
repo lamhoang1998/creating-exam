@@ -14,7 +14,7 @@ function AdminLayout() {
 	return (
 		<div className={styles.adminLayOutContainer}>
 			<SideBar collapsed={sidebarCollapsed} onToggle={toggleSidebar} />
-			<Header collapsed={sidebarCollapsed} />
+			<Header collapsed={sidebarCollapsed} onToggle={toggleSidebar} />
 			<div
 				className={`${styles.outletContainer} ${
 					sidebarCollapsed ? styles.collapsed : ""

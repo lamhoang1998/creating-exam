@@ -41,9 +41,11 @@ function SideBar({ collapsed, onToggle }: SideBarProps) {
 		<div className={`${styles.sidebar} ${collapsed ? styles.collapsed : ""}`}>
 			<div className={styles.sidebarHeader}>
 				{!collapsed && <h2 className={styles.sidebarTitle}>Admin Panel</h2>}
-				<button className={styles.toggleButton} onClick={onToggle}>
-					{collapsed ? "→" : "←"}
-				</button>
+				{!collapsed && (
+					<button className={styles.toggleBtn} onClick={onToggle}>
+						X
+					</button>
+				)}
 			</div>
 
 			<nav className={styles.navigation}>
