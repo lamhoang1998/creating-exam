@@ -17,11 +17,7 @@ const navigationItems = [
 		label: "Answers",
 		icon: "✅",
 	},
-	{
-		path: "/admin/dashboard",
-		label: "Dashboard",
-		icon: "📊",
-	},
+
 	{
 		path: "/admin/settings",
 		label: "Settings",

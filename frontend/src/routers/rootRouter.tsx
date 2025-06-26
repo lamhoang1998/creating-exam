@@ -18,7 +18,7 @@ const rootRouter = createBrowserRouter([
 		path: "/admin",
 		element: <AdminLayout />,
 		children: [
-			{ path: "user", element: <User /> },
+			{ path: "users", element: <User /> },
 			{ path: "exams", element: <Exams /> },
 			{ path: "answers", element: <Answers /> },
 		],
