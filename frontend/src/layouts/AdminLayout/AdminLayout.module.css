@@ -1,3 +1,4 @@
+/* admin styles */
 .adminLayOutContainer {
 	display: grid;
 	grid-template-rows: auto 1fr;
@@ -12,4 +13,37 @@
 	min-height: 0;
 	overflow: auto;
 	background-color: #f9fafb;
+}
+
+.adminLayOutContainer.collapsed {
+	grid-template-columns: 70px 1fr;
+}
+
+.adminLayOutContainer .outletContainer.collapsed {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 2;
+	grid-row-end: 3;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+	.adminLayOutContainer {
+		grid-template-columns: 70px 1fr;
+	}
+
+	.sidebar {
+		width: 70px;
+	}
+
+	.sidebar:not(.collapsed) {
+		position: fixed;
+		width: 250px;
+		height: 100vh;
+		z-index: 100;
+	}
+
+	.sidebar.collapsed ~ .outletContainer {
+		grid-column: 1 / span 2;
+	}
 }

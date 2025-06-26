@@ -1,8 +1,12 @@
 import styles from "./Header.module.css";
 
-function Header() {
+type props = {
+	collapsed: boolean;
+};
+
+function Header({ collapsed }: props) {
 	return (
-		<div className={styles.header}>
+		<div className={`${styles.header} ${collapsed ? styles.collapsed : ""}`}>
 			<h1 className={styles.title}>Dashboard</h1>
 			<div className={styles.actions}>
 				<span className={styles.welcomeText}>Welcome, Admin</span>

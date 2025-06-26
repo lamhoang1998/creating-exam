@@ -9,6 +9,13 @@
 	grid-column: 2;
 }
 
+.header.collapsed {
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 2;
+}
+
 .title {
 	font-size: 1.5rem;
 	font-weight: 600;
@@ -49,39 +56,4 @@
 .logoutButton:focus {
 	outline: none;
 	box-shadow: 0 0 0 2px #3b82f6, 0 0 0 4px rgba(59, 130, 246, 0.2);
-}
-
-@media (max-width: 768px) {
-	.header {
-		grid-row: 2;
-		grid-column: 1;
-		padding: 0.75rem;
-	}
-
-	.title {
-		font-size: 1.25rem;
-	}
-
-	.actions {
-		gap: 0.5rem;
-	}
-
-	.welcomeText {
-		display: none;
-	}
-
-	.logoutButton {
-		padding: 0.5rem 0.75rem;
-		font-size: 0.875rem;
-	}
-}
-
-@media (max-width: 480px) {
-	.header {
-		padding: 0.5rem;
-	}
-
-	.title {
-		font-size: 1.125rem;
-	}
 }

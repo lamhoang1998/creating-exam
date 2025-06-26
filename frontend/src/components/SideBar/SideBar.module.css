@@ -1,3 +1,4 @@
+/* side bar styles */
 .sidebar {
 	grid-row: 1 / span 2;
 	grid-column: 1;
@@ -94,57 +95,21 @@
 	padding: 0 1rem;
 }
 
-@media (max-width: 768px) {
-	.sidebar {
-		grid-row: 1;
-		grid-column: 1;
-		padding: 0.75rem;
-		min-width: auto;
-	}
-
-	.navigation {
-		flex-direction: row;
-		overflow-x: auto;
-		overflow-y: visible;
-		gap: 0.5rem;
-		padding-bottom: 0.5rem;
-	}
-
-	.navItem {
-		white-space: nowrap;
-		min-width: auto;
-		padding: 0.5rem 0.75rem;
-		flex-shrink: 0;
-	}
-
-	.navItem:hover {
-		transform: translateY(-2px);
-	}
-
-	.navSection {
-		display: contents;
-	}
-
-	.navSectionTitle {
-		display: none;
-	}
-}
-
-.sidebar.collapsed {
-	min-width: 60px;
-}
-
-.sidebar.collapsed .sidebarTitle,
-.sidebar.collapsed .navSectionTitle {
+/* Collapsed state styles */
+/* .sidebar.collapsed .label,
+.sidebar.collapsed .badge {
 	display: none;
 }
 
-.sidebar.collapsed .navItem .label,
-.sidebar.collapsed .navItem .badge {
-	display: none;
+.sidebar.collapsed .icon {
+	margin-right: 0;
 }
 
 .sidebar.collapsed .navItem {
 	justify-content: center;
 	padding: 0.75rem;
+} */
+
+.sidebar.collapsed {
+	display: none;
 }
