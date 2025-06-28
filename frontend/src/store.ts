@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import usersReducer from "./reducers/users.reducers";
-import globalModalReducer from "./components/GlobalModal/GlobalModal";
+import globalModalReducer from "./reducers/globalModal.reducers";
 
 export const store = configureStore({
 	reducer: {

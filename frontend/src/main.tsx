@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider as ProviderRedux } from "react-redux";
 import { store } from "./store.ts";
 import { ToastContainer } from "react-toastify";
+import ShowGlobalModal from "./components/GlobalModal/ShowGlobalModal.tsx";
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -22,7 +23,9 @@ createRoot(document.getElementById("root")!).render(
 	<StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<ProviderRedux store={store}>
-				<App />
+				<ShowGlobalModal>
+					<App />
+				</ShowGlobalModal>
 				<ToastContainer
 					position="bottom-right"
 					autoClose={3000}

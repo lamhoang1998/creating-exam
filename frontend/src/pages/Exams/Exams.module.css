@@ -1,0 +1,15 @@
+.addExamContainer {
+}
+
+.addExamHeader {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.addExamTitle {
+}
+
+.addExamBtn {
+	cursor: pointer;
+}
