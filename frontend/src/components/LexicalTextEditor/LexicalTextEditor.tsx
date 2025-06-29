@@ -1,4 +1,3 @@
-import React from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
@@ -6,26 +5,50 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { $generateHtmlFromNodes } from "@lexical/html";
-import { ParagraphNode, TextNode } from "lexical";
+import {
+	$createParagraphNode,
+	$createTextNode,
+	type EditorState,
+	ParagraphNode,
+	TextNode,
+} from "lexical";
+
+import { $generateNodesFromDOM } from "@lexical/html";
+import { $getRoot, $insertNodes } from "lexical";
+import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
+import { useEffect, useRef } from "react";
+import { ListNode, ListItemNode } from "@lexical/list";
+import { HeadingNode } from "@lexical/rich-text";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 
 type Props = {
 	value?: string;
 	onChange?: (value: string) => void;
 };
 
-const editorConfig = {
-	namespace: "MyEditor",
-	theme: {},
-	nodes: [ParagraphNode, TextNode],
-	onError(error: Error) {
-		console.error("Lexical error:", error);
-		throw error;
-	},
+const initialState = () => {
+	const paragraph = $createParagraphNode();
+	const text = $createTextNode();
+	paragraph.append(text);
+	const root = $getRoot().append(paragraph);
+	root.selectEnd();
 };
 
-export default function LexicalTextEditor({ onChange }: Props) {
+const editorConfig = {
+	namespace: "Editor",
+	theme: {},
+	onError: (error: Error) => {
+		throw error;
+	},
+	nodes: [ListNode, ListItemNode, HeadingNode, ParagraphNode, TextNode],
+	EditorState: initialState,
+};
+
+export default function LexicalTextEditor({ value, onChange }: Props) {
 	return (
 		<LexicalComposer initialConfig={editorConfig}>
+			<ListPlugin />
+			<SetInitialHtmlPlugin html={value} />
 			<div
 				style={{
 					border: "1px solid #ccc",
@@ -61,4 +84,35 @@ export default function LexicalTextEditor({ onChange }: Props) {
 			</div>
 		</LexicalComposer>
 	);
+}
+
+function SetInitialHtmlPlugin({ html }: { html?: string }) {
+	const [editor] = useLexicalComposerContext();
+	const hasInitialized = useRef(false);
+
+	useEffect(() => {
+		if (hasInitialized.current || !html) return;
+
+		editor.update(() => {
+			// $getRoot()
+			// 	.getChildren()
+			// 	.forEach((n) => n.remove());
+			const root = $getRoot();
+			root.clear();
+			const isEditorEmpty = root.getChildrenSize() === 0;
+			if (!isEditorEmpty) return;
+			const parser = new DOMParser();
+			const dom = parser.parseFromString(html, "text/html");
+			const nodes = $generateNodesFromDOM(editor, dom);
+			root.selectStart();
+			$insertNodes(nodes);
+			hasInitialized.current = true;
+
+			const paragraphNode = $createParagraphNode();
+			nodes.forEach((n) => paragraphNode.append(n));
+			$getRoot().append(paragraphNode);
+		});
+	}, [editor, html]);
+
+	return null;
 }

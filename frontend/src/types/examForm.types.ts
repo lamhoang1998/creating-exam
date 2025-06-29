@@ -1,20 +1,23 @@
-export type QuestionType = "multiple" | "problem";
-
 export type AnswerOption = {
-	text: string;
+	text?: string;
 };
 
+export type AnswerGroup = {
+	answer?: AnswerOption[];
+	correctAnswer?: string;
+};
+
+export type QuestionType = "multiple" | "problem";
+
 export type QuestionData = {
-	id: number;
-	type: QuestionType;
-	content: string;
-	score: number;
-	answers?: AnswerOption[];
-	correctAnswerIndex?: number;
+	type?: QuestionType;
+	content?: string;
+	score?: number;
+	answers?: AnswerGroup;
 };
 
 export type ExamFormData = {
-	examName: string;
-	subject: string;
-	questions: QuestionData[];
+	examName?: string;
+	subject?: string;
+	questions?: QuestionData[];
 };

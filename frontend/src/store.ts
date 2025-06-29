@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import usersReducer from "./reducers/users.reducers";
 import globalModalReducer from "./reducers/globalModal.reducers";
+import examFormReducer from "./reducers/examForm.reducers";
 
 export const store = configureStore({
 	reducer: {
 		userState: usersReducer,
 		globalModalState: globalModalReducer,
+		examFormState: examFormReducer,
 	},
 });
 
