@@ -1,15 +1,20 @@
 .addExamContainer {
+	min-height: 100vh;
 }
 
 .addExamHeader {
 	width: 100%;
 	display: flex;
-	justify-content: center;
+	justify-content: space-between;
+	align-items: center;
 }
 
 .addExamTitle {
+	display: inline-block;
+	padding: 0.25rem;
 }
 
 .addExamBtn {
 	cursor: pointer;
+	padding: 0.25rem;
 }

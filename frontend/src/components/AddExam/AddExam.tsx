@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../hooks";
 import { setCloseAddExam } from "../../reducers/globalModal.reducers";
 import type { ExamFormData, QuestionData } from "../../types/examForm.types";
-import ExamForm from "../Form/ExamForm/ExamForm";
 import QuestionForm from "../Form/QuestionForm/QuestionForm";
 import styles from "./AddExam.module.css";
 import { Button, Form, Input, Modal, Select } from "antd";
@@ -33,18 +32,17 @@ function AddExam() {
 		if (showAddExam && examFormState) {
 			const keys = examFormState?.questions?.map((_, i) => i);
 
-			const cleanedQuestions = examFormState.questions?.map((q) => ({
-				...q,
-				content: htmlToText(q.content || ""),
-			}));
-
-			console.log("cleaned question", cleanedQuestions);
+			// const cleanedQuestions = examFormState.questions?.map((q) => ({
+			// 	...q,
+			// 	content: htmlToText(q.content || ""),
+			// }));
 
 			setQuestions(keys as number[]);
-			form.setFieldsValue({
-				...examFormState,
-				questions: cleanedQuestions,
-			});
+			// form.setFieldsValue({
+			// 	...examFormState,
+			// 	questions: cleanedQuestions,
+			// });
+			form.setFieldsValue(examFormState);
 		}
 	}, [showAddExam, examFormState]);
 
@@ -65,6 +63,7 @@ function AddExam() {
 		<>
 			<Modal
 				title={<h2 className="text-3xl font-bold">Add Exams</h2>}
+				width={780}
 				open={showAddExam}
 				onCancel={() => {
 					dispatch(setCloseAddExam());
@@ -81,18 +80,18 @@ function AddExam() {
 
 						console.log("all values", allValues);
 
-						const normalizedQuestions =
-							allValues.questions?.map((question) => ({
-								...question,
-								content: htmlToText(question.content || ""),
-							})) ?? [];
+						// const normalizedQuestions =
+						// 	allValues.questions?.map((question) => ({
+						// 		...question,
+						// 		content: htmlToText(question.content || ""),
+						// 	})) ?? [];
 
-						const normalizedValues = {
-							...allValues,
-							questions: normalizedQuestions,
-						};
+						// const normalizedValues = {
+						// 	...allValues,
+						// 	questions: normalizedQuestions,
+						// };
 
-						debounceSave(normalizedValues);
+						debounceSave(allValues);
 					}}
 				>
 					<Form.Item

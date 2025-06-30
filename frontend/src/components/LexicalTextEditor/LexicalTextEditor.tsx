@@ -20,6 +20,8 @@ import { useEffect, useRef } from "react";
 import { ListNode, ListItemNode } from "@lexical/list";
 import { HeadingNode } from "@lexical/rich-text";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { lexicalTheme } from "../../utils/util.utils";
+import ToolBar from "./ToolBar";
 
 type Props = {
 	value?: string;
@@ -36,7 +38,7 @@ const initialState = () => {
 
 const editorConfig = {
 	namespace: "Editor",
-	theme: {},
+	theme: lexicalTheme,
 	onError: (error: Error) => {
 		throw error;
 	},
@@ -49,6 +51,7 @@ export default function LexicalTextEditor({ value, onChange }: Props) {
 		<LexicalComposer initialConfig={editorConfig}>
 			<ListPlugin />
 			<SetInitialHtmlPlugin html={value} />
+			<ToolBar />
 			<div
 				style={{
 					border: "1px solid #ccc",

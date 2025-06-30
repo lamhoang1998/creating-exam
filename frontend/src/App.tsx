@@ -13,7 +13,7 @@ function App() {
 	return (
 		<>
 			{showAddExam && <AddExam />}
-			<RouterProvider router={rootRouter} />;
+			<RouterProvider router={rootRouter} />
 		</>
 	);
 }

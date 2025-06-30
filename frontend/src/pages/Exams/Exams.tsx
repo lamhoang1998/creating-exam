@@ -12,9 +12,9 @@ function Exams() {
 	console.log("showExam", showAddExam);
 
 	return (
-		<div>
+		<div className={styles.addExamContainer}>
 			<div className={styles.addExamHeader}>
-				<span>Exam Management</span>
+				<span className={styles.addExamTitle}>Exam Management</span>
 				<button
 					className={styles.addExamBtn}
 					onClick={() => dispatch(setOpenAddExam())}
