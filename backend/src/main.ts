@@ -4,6 +4,8 @@ import { ValidationPipe } from '@nestjs/common';
 import { JwtAuthGuard } from './modules/auth/jwt-auth.guard';
 import { User as AuthType } from './common/types/users.types';
 import { ResponseSuccessInterceptor } from './common/interceptors/response-success.interceptor';
+import * as express from 'express';
+import { join } from 'path';
 
 declare global {
   namespace Express {
@@ -27,6 +29,8 @@ async function bootstrap() {
 
   app.useGlobalGuards(new JwtAuthGuard(reflector));
   app.useGlobalInterceptors(new ResponseSuccessInterceptor(reflector));
+
+  app.use('/images', express.static(join(__dirname, '..', 'images')));
 
   await app.listen(process.env.PORT ?? 3001);
 }

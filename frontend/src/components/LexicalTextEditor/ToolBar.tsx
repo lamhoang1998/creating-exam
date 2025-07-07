@@ -1,13 +1,88 @@
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { Button } from "antd";
-import { FORMAT_ELEMENT_COMMAND, FORMAT_TEXT_COMMAND } from "lexical";
+import {
+	FORMAT_ELEMENT_COMMAND,
+	FORMAT_TEXT_COMMAND,
+	REDO_COMMAND,
+	UNDO_COMMAND,
+} from "lexical";
+import { RICH_TEXT_OPTIONS, RichTextAction } from "./actions";
+import ListPlugin from "./plugins/ListPlugin";
+import ImagePlugin from "./plugins/ImagePlugin";
+import {
+	ClearOutlined,
+	DeleteColumnOutlined,
+	DeleteOutlined,
+} from "@ant-design/icons";
 
 function ToolBar() {
 	const [editor] = useLexicalComposerContext();
 
+	function onAction(id: RichTextAction) {
+		switch (id) {
+			case RichTextAction.Bold: {
+				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
+				break;
+			}
+			case RichTextAction.Italics: {
+				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "italic");
+				break;
+			}
+			case RichTextAction.Underline: {
+				console.log("underline");
+				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "underline");
+				break;
+			}
+			case RichTextAction.Strikethrough: {
+				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "strikethrough");
+				break;
+			}
+			case RichTextAction.Superscript: {
+				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "superscript");
+				break;
+			}
+			case RichTextAction.Subscript: {
+				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "subscript");
+				break;
+			}
+			case RichTextAction.Highlight: {
+				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "highlight");
+				break;
+			}
+			case RichTextAction.Code: {
+				editor.dispatchCommand(FORMAT_TEXT_COMMAND, "code");
+				break;
+			}
+			case RichTextAction.LeftAlign: {
+				editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "left");
+				break;
+			}
+			case RichTextAction.RightAlign: {
+				editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "right");
+				break;
+			}
+			case RichTextAction.CenterAlign: {
+				editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "center");
+				break;
+			}
+			case RichTextAction.JustifyAlign: {
+				editor.dispatchCommand(FORMAT_ELEMENT_COMMAND, "justify");
+				break;
+			}
+			case RichTextAction.Undo: {
+				editor.dispatchCommand(UNDO_COMMAND, undefined);
+				break;
+			}
+			case RichTextAction.Redo: {
+				editor.dispatchCommand(REDO_COMMAND, undefined);
+				break;
+			}
+		}
+	}
+
 	return (
-		<div>
-			<Button
+		<div style={{ display: `flex` }}>
+			{/* <Button
 				onClick={() => {
 					editor.dispatchCommand(FORMAT_TEXT_COMMAND, "bold");
 				}}
@@ -20,7 +95,19 @@ function ToolBar() {
 				}}
 			>
 				i
-			</Button>
+			</Button> */}
+
+			{RICH_TEXT_OPTIONS.map(({ id, label, icon, fontSize }) => (
+				<Button
+					key={id}
+					aria-label={label as string}
+					icon={icon}
+					onClick={() => onAction(id)}
+					style={{ fontSize: `${fontSize}` }}
+				/>
+			))}
+			<ListPlugin />
+			<ImagePlugin />
 		</div>
 	);
 }

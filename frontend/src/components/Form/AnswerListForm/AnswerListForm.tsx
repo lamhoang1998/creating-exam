@@ -1,5 +1,6 @@
 import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Radio, Space } from "antd";
+import useFormInstance from "antd/es/form/hooks/useFormInstance";
 
 // function AnswerListForm({ index }: { index: number }) {
 // 	return (
@@ -128,13 +129,6 @@ function AnswerListForm({ index }: { index: number }) {
 					</>
 				)}
 			</Form.List>
-
-			<Form.Item
-				label="correctAnswer"
-				name={["questions", index, "answers", "correctAnswer"]}
-			>
-				<Input />
-			</Form.Item>
 		</>
 	);
 }

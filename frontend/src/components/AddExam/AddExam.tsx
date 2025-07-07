@@ -8,7 +8,6 @@ import { Button, Form, Input, Modal, Select } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { setExamForm } from "../../reducers/examForm.reducers";
 import debounce from "lodash/debounce";
-import { htmlToText } from "../../utils/util.utils";
 
 const subjects = ["Mathematics", "English", "Literature"];
 
@@ -30,14 +29,14 @@ function AddExam() {
 
 	useEffect(() => {
 		if (showAddExam && examFormState) {
-			const keys = examFormState?.questions?.map((_, i) => i);
+			const keys = examFormState?.questions?.map((_, i) => i) ?? [];
 
 			// const cleanedQuestions = examFormState.questions?.map((q) => ({
 			// 	...q,
 			// 	content: htmlToText(q.content || ""),
 			// }));
 
-			setQuestions(keys as number[]);
+			setQuestions(keys);
 			// form.setFieldsValue({
 			// 	...examFormState,
 			// 	questions: cleanedQuestions,
@@ -63,7 +62,7 @@ function AddExam() {
 		<>
 			<Modal
 				title={<h2 className="text-3xl font-bold">Add Exams</h2>}
-				width={780}
+				width={980}
 				open={showAddExam}
 				onCancel={() => {
 					dispatch(setCloseAddExam());
@@ -75,23 +74,28 @@ function AddExam() {
 				<Form
 					form={form}
 					onFinish={onFinish}
-					onValuesChange={(_, all) => {
-						const allValues = all as ExamFormData;
+					// onValuesChange={(_, all) => {
+					// 	const allValues = all as ExamFormData;
 
-						console.log("all values", allValues);
+					// 	console.log("all values", allValues);
 
-						// const normalizedQuestions =
-						// 	allValues.questions?.map((question) => ({
-						// 		...question,
-						// 		content: htmlToText(question.content || ""),
-						// 	})) ?? [];
+					// 	const normalizedQuestions =
+					// 		allValues.questions?.map((question) => ({
+					// 			...question,
+					// 			content: htmlToText(question.content || ""),
+					// 		})) ?? [];
 
-						// const normalizedValues = {
-						// 	...allValues,
-						// 	questions: normalizedQuestions,
-						// };
+					// 	const normalizedValues = {
+					// 		...allValues,
+					// 		questions: normalizedQuestions,
+					// 	};
 
-						debounceSave(allValues);
+					// 	debounceSave(allValues);
+					// }}
+					onFieldsChange={() => {
+						const values = form.getFieldsValue();
+						console.log("Updated form values (fieldsChange):", values);
+						debounceSave(values);
 					}}
 				>
 					<Form.Item
@@ -110,7 +114,7 @@ function AddExam() {
 						preserve
 					>
 						<Select placeholder="Select a subject">
-							{subjects.map((sub) => (
+							{subjects?.map((sub) => (
 								<Select.Option key={sub} value={sub}>
 									{sub}
 								</Select.Option>
@@ -118,9 +122,10 @@ function AddExam() {
 						</Select>
 					</Form.Item>
 
-					{questions.map((_, index) => (
-						<QuestionForm key={index} index={index} />
-					))}
+					{questions.length > 0 &&
+						questions?.map((_, index) => (
+							<QuestionForm key={index} index={index} />
+						))}
 
 					<Button
 						type="dashed"

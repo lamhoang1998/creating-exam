@@ -5,6 +5,7 @@ import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { $generateHtmlFromNodes } from "@lexical/html";
+import { ImageNode } from "./nodes/ImageNode.tsx";
 import {
 	$createParagraphNode,
 	$createTextNode,
@@ -22,6 +23,7 @@ import { HeadingNode } from "@lexical/rich-text";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { lexicalTheme } from "../../utils/util.utils";
 import ToolBar from "./ToolBar";
+import { AutoFocusPlugin } from "@lexical/react/LexicalAutoFocusPlugin";
 
 type Props = {
 	value?: string;
@@ -42,7 +44,14 @@ const editorConfig = {
 	onError: (error: Error) => {
 		throw error;
 	},
-	nodes: [ListNode, ListItemNode, HeadingNode, ParagraphNode, TextNode],
+	nodes: [
+		ListNode,
+		ListItemNode,
+		HeadingNode,
+		ParagraphNode,
+		TextNode,
+		ImageNode,
+	],
 	EditorState: initialState,
 };
 
@@ -76,6 +85,7 @@ export default function LexicalTextEditor({ value, onChange }: Props) {
 					ErrorBoundary={LexicalErrorBoundary}
 				/>
 				<HistoryPlugin />
+				<AutoFocusPlugin />
 				<OnChangePlugin
 					onChange={(editorState, editor) => {
 						editorState.read(() => {

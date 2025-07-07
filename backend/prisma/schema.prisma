@@ -27,7 +27,67 @@ model users {
   avatar      String?   @db.VarChar(255)
   createdAt   DateTime? @default(now()) @db.Timestamp(0)
   updatedAt   DateTime? @default(now()) @db.Timestamp(0)
+  exams       exams[]
   roles       roles?    @relation(fields: [roleId], references: [roleId], onDelete: NoAction, onUpdate: NoAction, map: "fk_users_roles")
 
   @@index([roleId], map: "fk_users_roles")
+}
+
+model answers {
+  answerId   Int       @id @default(autoincrement())
+  answerText String    @db.VarChar(255)
+  questionId Int
+  createdAt  DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime? @default(now()) @db.Timestamp(0)
+  questions  questions @relation(fields: [questionId], references: [questionId], onDelete: NoAction, onUpdate: NoAction, map: "answers_ibfk_1")
+
+  @@index([questionId], map: "questionId")
+}
+
+model courses {
+  courseId   Int       @id @default(autoincrement())
+  courseName String    @unique(map: "courseName") @db.VarChar(255)
+  createdAt  DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime? @default(now()) @db.Timestamp(0)
+  exams      exams[]
+}
+
+model exams {
+  examId    Int         @id @default(autoincrement())
+  examName  String      @db.VarChar(255)
+  userId    Int
+  courseId  Int
+  createdAt DateTime?   @default(now()) @db.Timestamp(0)
+  updatedAt DateTime?   @default(now()) @db.Timestamp(0)
+  courses   courses     @relation(fields: [courseId], references: [courseId], onDelete: NoAction, onUpdate: NoAction, map: "exams_ibfk_1")
+  users     users       @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "exams_ibfk_2")
+  questions questions[]
+
+  @@index([courseId], map: "courseId")
+  @@index([userId], map: "userId")
+}
+
+model questions {
+  questionId      Int           @id @default(autoincrement())
+  questionContent String        @db.VarChar(255)
+  questionImg     String?       @db.VarChar(255)
+  correctAnswer   String?       @db.VarChar(255)
+  examId          Int
+  questionTypeId  Int
+  createdAt       DateTime?     @default(now()) @db.Timestamp(0)
+  updatedAt       DateTime?     @default(now()) @db.Timestamp(0)
+  answers         answers[]
+  exams           exams         @relation(fields: [examId], references: [examId], onDelete: NoAction, onUpdate: NoAction, map: "questions_ibfk_1")
+  questiontypes   questiontypes @relation(fields: [questionTypeId], references: [questionTypeId], onDelete: NoAction, onUpdate: NoAction, map: "questions_ibfk_2")
+
+  @@index([examId], map: "examId")
+  @@index([questionTypeId], map: "questionTypeId")
+}
+
+model questiontypes {
+  questionTypeId   Int         @id @default(autoincrement())
+  questionTypeName String      @unique(map: "questionTypeName") @db.VarChar(255)
+  createdAt        DateTime?   @default(now()) @db.Timestamp(0)
+  updatedAt        DateTime?   @default(now()) @db.Timestamp(0)
+  questions        questions[]
 }

@@ -1,0 +1,12 @@
+.customUploadSize .ant-upload-list-item {
+	width: 160px !important;
+	height: 160px !important;
+}
+
+/* Make the image fill the new container size */
+.customUploadSize .ant-upload-list-item-thumbnail img {
+	width: 100% !important;
+	height: 100% !important;
+	object-fit: cover;
+	border-radius: 8px;
+}
