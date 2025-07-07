@@ -56,3 +56,9 @@ export default tseslint.config({
 # Upload file to api:
 
 we get the file from form data having type as FileList interface, then append its property as an object with File interface to the formData object and submit it to backend via api.
+
+# protect route:
+
+- first, check if the allowRoles array is passed? if it is then check roles before navigating to that route.
+  -second, once we don't pass the allowRoles object, that means we check if the user login or not, if they did, stop them from navigate back to the login route.
+  -remember to include outlet component in the parent component so that we can route to children routes.

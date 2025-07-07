@@ -15,6 +15,9 @@ export type LoginBody = {
 };
 
 export type LoginMetaData = {
+	userId: number;
+	email: string | null;
+	roleId: number | null;
 	accessToken: string;
 	refreshToken: string;
 };
@@ -35,3 +38,8 @@ type RegisterMetaData = {
 };
 
 export type RegisterResult = TRes<RegisterMetaData>;
+
+export enum UserRole {
+	admin = 1,
+	student = 2,
+}

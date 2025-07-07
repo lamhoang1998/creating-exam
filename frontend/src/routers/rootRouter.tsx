@@ -8,6 +8,9 @@ import AdminLayout from "../layouts/AdminLayout/AdminLayout";
 import User from "../pages/Users/User";
 import Exams from "../pages/Exams/Exams";
 import Answers from "../pages/Answers/Answers";
+import StudentLayout from "../layouts/StudentLayout/StudentLayout";
+import Courses from "../pages/Courses/Courses";
+import Grade from "../pages/Grade/Grade";
 
 const rootRouter = createBrowserRouter([
 	{
@@ -16,11 +19,23 @@ const rootRouter = createBrowserRouter([
 	},
 	{
 		path: "/admin",
-		element: <AdminLayout />,
+		element: (
+			<RootPage allowRoles={["admin"]}>
+				<AdminLayout />
+			</RootPage>
+		),
 		children: [
 			{ path: "users", element: <User /> },
 			{ path: "exams", element: <Exams /> },
 			{ path: "answers", element: <Answers /> },
+		],
+	},
+	{
+		path: "/student",
+		element: <StudentLayout />,
+		children: [
+			{ path: "courses", element: <Courses /> },
+			{ path: "grade", element: <Grade /> },
 		],
 	},
 	{

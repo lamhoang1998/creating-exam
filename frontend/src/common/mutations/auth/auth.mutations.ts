@@ -9,7 +9,6 @@ import { Api } from "../../axios/axios";
 import { ENDPOINT } from "../../constant/endpoint.constant";
 import type { AxiosError } from "axios";
 import type { ApiErrorResponse } from "../../../types/error.types";
-import { toast } from "react-toastify";
 
 export function useLoginMutation() {
 	return useMutation({

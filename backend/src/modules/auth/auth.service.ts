@@ -11,6 +11,7 @@ import { ConfigService } from '@nestjs/config';
 import * as bcrypt from 'bcrypt';
 import { saltRounds } from 'src/utils/auth.utils';
 import { LoginDto } from './dto/login-auth.dto';
+import { access } from 'fs';
 @Injectable()
 export class AuthService {
   constructor(
@@ -58,10 +59,14 @@ export class AuthService {
         email: email,
       },
       select: {
+        email: true,
         userId: true,
         password: true,
+        roleId: true,
       },
     });
+
+    console.log({ userExists });
 
     if (!userExists)
       throw new BadRequestException(
@@ -75,7 +80,15 @@ export class AuthService {
 
     const tokens = this.createTokens(userExists);
 
-    return tokens;
+    const user = {
+      userId: userExists.userId,
+      email: userExists.email,
+      roleId: userExists.roleId,
+      accessToken: tokens.accessToken,
+      refreshToken: tokens.refreshToken,
+    };
+
+    return user;
   }
 
   async refreshToken(req: Request) {

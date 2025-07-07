@@ -1,18 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ApiWithToken } from "../common/axios/axios";
-import { ENDPOINT } from "../common/constant/endpoint.constant";
 import { getAccessToken, logOut } from "../helpers/auth.helper";
-import type { AppDispatch } from "../store";
 import type { TRes } from "../types/app.types";
 import type { UserInfo } from "../types/users.types";
+import type { LoginMetaData, LoginResult } from "../types/auth.types";
 
 type InitialState = {
-	info: UserInfo | null;
+	login: LoginMetaData | null;
 	isLogin: boolean;
 };
 
 const initialState: InitialState = {
-	info: null,
+	login: null,
 	isLogin: !!getAccessToken(),
 };
 
@@ -20,8 +18,8 @@ const usersSlice = createSlice({
 	name: "usersSlice",
 	initialState,
 	reducers: {
-		SET_INFO: (state, { payload }) => {
-			state.info = payload;
+		setLogin: (state, { payload }) => {
+			state.login = payload;
 		},
 		UPDATE_IS_LOGIN: (state) => {
 			state.isLogin = !!getAccessToken();
@@ -29,20 +27,20 @@ const usersSlice = createSlice({
 	},
 });
 
-export const { UPDATE_IS_LOGIN, SET_INFO } = usersSlice.actions;
+export const { UPDATE_IS_LOGIN, setLogin } = usersSlice.actions;
 
 export default usersSlice.reducer;
 
-export const getInfo = () => {
-	return async (dispatch: AppDispatch) => {
-		console.log("dispatch");
-		ApiWithToken.get<TRes<UserInfo>>(ENDPOINT.USER.GETINFO)
-			.then(({ data }) => {
-				console.log("user data", data);
-				dispatch(SET_INFO(data.metaData));
-			})
-			.catch(() => {
-				logOut();
-			});
-	};
-};
+// export const getInfo = () => {
+// 	return async (dispatch: AppDispatch) => {
+// 		console.log("dispatch");
+// 		ApiWithToken.get<TRes<UserInfo>>(ENDPOINT.USER.GETINFO)
+// 			.then(({ data }) => {
+// 				console.log("user data", data);
+// 				dispatch(SET_INFO(data.metaData));
+// 			})
+// 			.catch(() => {
+// 				logOut();
+// 			});
+// 	};
+// };

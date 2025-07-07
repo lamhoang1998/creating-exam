@@ -10,7 +10,7 @@ export type LoginBody = {
 	password: string;
 };
 
-export type LoginMetaData = {
-	accessToken: string;
-	refreshToken: string;
-};
+// export type LoginMetaData = {
+// 	accessToken: string;
+// 	refreshToken: string;
+// };
