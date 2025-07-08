@@ -16,7 +16,6 @@ import { Public } from 'src/common/decorator/public.decorator';
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
-  @Public()
   @ResponseMessage(`successfully updated file locally`)
   @Post(`file-local`)
   @UseInterceptors(FileInterceptor('img', { storage: storageFileLocal }))
