@@ -11,4 +11,7 @@ export const ENDPOINT = {
 	UPLOAD: {
 		FILELOCAL: `upload/file-local`,
 	},
+	EXAM: {
+		ADDEXAM: `exams/add-exam`,
+	},
 };

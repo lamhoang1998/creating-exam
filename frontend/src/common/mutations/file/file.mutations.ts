@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { Api, ApiWithToken } from "../../axios/axios";
+import { ApiWithToken } from "../../axios/axios";
 import { ENDPOINT } from "../../constant/endpoint.constant";
 import type { TRes } from "../../../types/app.types";
 

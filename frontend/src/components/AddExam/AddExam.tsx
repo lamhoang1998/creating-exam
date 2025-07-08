@@ -8,6 +8,9 @@ import { Button, Form, Input, Modal, Select } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
 import { setExamForm } from "../../reducers/examForm.reducers";
 import debounce from "lodash/debounce";
+import type { Exam } from "../../types/exams.types";
+import { useAddExamMutation } from "../../common/mutations/exam/exam.mutations";
+import { toast } from "react-toastify";
 
 const subjects = ["Mathematics", "English", "Literature"];
 
@@ -23,8 +26,15 @@ function AddExam() {
 	const [form] = Form.useForm();
 	const [questions, setQuestions] = useState<number[]>([]);
 
-	const onFinish = (values: any) => {
+	const addExam = useAddExamMutation();
+
+	const onFinish = (values: Exam) => {
 		console.log("Final Exam Form Data", values);
+		addExam.mutate(values, {
+			onSuccess: () => {
+				toast.success("sucessfully add exams");
+			},
+		});
 	};
 
 	useEffect(() => {

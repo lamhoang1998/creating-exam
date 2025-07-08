@@ -75,15 +75,15 @@ question: {
 function AnswerListForm({ index }: { index: number }) {
 	return (
 		<>
-			<Form.List name={["questions", index, "answers", "answer"]}>
+			<Form.List name={["questions", index, "answers"]}>
 				{(fields, { add, remove }) => (
 					<>
 						<Form.Item
 							label=" Answer"
-							name={["questions", "answer"]}
-							rules={[
-								{ required: true, message: "Please select a correct answer" },
-							]}
+							name={["questions", index, "answer"]}
+							// rules={[
+							// 	{ required: true, message: "Please select a correct answer" },
+							// ]}
 						>
 							<Radio.Group style={{ width: "100%" }}>
 								<Space direction="vertical" style={{ width: "100%" }}>

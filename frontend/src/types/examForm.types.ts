@@ -6,7 +6,6 @@ export type AnswerOption = {
 
 export type AnswerGroup = {
 	answer?: AnswerOption[];
-	correctAnswer?: string;
 };
 
 export type QuestionType = "multiple" | "problem";
@@ -26,7 +25,7 @@ export type QuestionData = {
 	content?: string;
 	score?: number;
 	answers?: AnswerGroup;
-	problemImage?: ProblemImageData[];
+	correctAnswer?: number;
 };
 
 export type ExamFormData = {
