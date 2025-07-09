@@ -12,7 +12,7 @@ import {
 class answer {
   @IsNotEmpty({ message: 'text is required and cannot be empty' })
   @IsString()
-  text: number;
+  text: string;
 }
 
 export class question {
@@ -21,8 +21,8 @@ export class question {
   content: string;
 
   @IsNotEmpty({ message: 'correct answer is required and cannot be empty' })
-  @IsNumber()
-  correctAnswer: number;
+  @IsString()
+  correctAnswer: string;
 
   @IsNotEmpty({ message: 'score is required and cannot be empty' })
   @IsNumber()

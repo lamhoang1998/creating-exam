@@ -51,7 +51,7 @@ function QuestionForm({ index }: { index: number }) {
 				label="correctAnswer"
 				name={["questions", index, "correctAnswer"]}
 			>
-				<InputNumber min={0} />
+				<Input />
 			</Form.Item>
 		</Card>
 	);
