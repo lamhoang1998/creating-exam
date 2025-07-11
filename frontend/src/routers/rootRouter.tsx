@@ -29,7 +29,6 @@ const rootRouter = createBrowserRouter([
 			{ path: "users", element: <User /> },
 			{ path: "exams", element: <Exams /> },
 			{ path: "answers", element: <Answers /> },
-			{ path: "details/:id", element: <UserDetails /> },
 		],
 	},
 	{
@@ -61,6 +60,14 @@ const rootRouter = createBrowserRouter([
 		element: (
 			<RootPage>
 				<Register />
+			</RootPage>
+		),
+	},
+	{
+		path: "/details/:id",
+		element: (
+			<RootPage allowRoles={["admin", "student"]}>
+				<UserDetails />
 			</RootPage>
 		),
 	},

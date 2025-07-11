@@ -17,7 +17,9 @@ export class UsersController {
   }
 
   @Get(`get-student-details`)
-  getStudentsDetails(@Query() userId: number) {
-    return this.usersService.getStudentsDetail(userId);
+  getStudentsDetails(@Query() userId: { Id: string }) {
+    console.log({ userId });
+    const studentId = Number(userId.Id);
+    return this.usersService.getStudentsDetail(studentId);
   }
 }

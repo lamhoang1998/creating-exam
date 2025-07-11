@@ -27,7 +27,7 @@ function User() {
 				onRow={(record, _) => {
 					return {
 						onClick: () => {
-							navigate(`/admin/details/${record.userId}`);
+							navigate(`/details/${record.userId}`);
 						},
 					};
 				}}

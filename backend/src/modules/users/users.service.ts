@@ -30,5 +30,12 @@ export class UsersService {
     return students;
   }
 
-  async getStudentsDetail(userId: number) {}
+  async getStudentsDetail(userId: number) {
+    const studentDetails = await this.prisma.users.findUnique({
+      where: { userId: userId },
+      omit: { password: true },
+    });
+
+    return studentDetails;
+  }
 }

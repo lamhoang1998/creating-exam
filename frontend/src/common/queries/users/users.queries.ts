@@ -16,13 +16,15 @@ export function useGetStudentQuery() {
 	});
 }
 
-export function useGetStudentDetailsQuery(userId: number) {
+export function useGetStudentDetailsQuery(Id: number) {
 	return useQuery({
 		queryKey: ["studentDetails", "userId"],
 		queryFn: async () => {
 			const data = await ApiWithToken.get<TRes<UserInfo>>(
-				`${ENDPOINT.USER.GETSTUDENTDETAILS}/{}`
+				`${ENDPOINT.USER.GETSTUDENTDETAILS}?Id=${Id}`
 			);
+
+			return data;
 		},
 	});
 }
