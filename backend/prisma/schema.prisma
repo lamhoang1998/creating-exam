@@ -18,17 +18,18 @@ model roles {
 }
 
 model users {
-  userId      Int       @id @default(autoincrement())
-  email       String?   @db.VarChar(255)
-  fullName    String?   @db.VarChar(255)
-  phoneNumber String?   @db.VarChar(255)
-  password    String?   @db.VarChar(255)
-  roleId      Int?      @default(2)
-  avatar      String?   @db.VarChar(255)
-  createdAt   DateTime? @default(now()) @db.Timestamp(0)
-  updatedAt   DateTime? @default(now()) @db.Timestamp(0)
+  userId      Int          @id @default(autoincrement())
+  email       String?      @db.VarChar(255)
+  fullName    String?      @db.VarChar(255)
+  phoneNumber String?      @db.VarChar(255)
+  password    String?      @db.VarChar(255)
+  roleId      Int?         @default(2)
+  avatar      String?      @db.VarChar(255)
+  createdAt   DateTime?    @default(now()) @db.Timestamp(0)
+  updatedAt   DateTime?    @default(now()) @db.Timestamp(0)
   exams       exams[]
-  roles       roles?    @relation(fields: [roleId], references: [roleId], onDelete: NoAction, onUpdate: NoAction, map: "fk_users_roles")
+  takingexam  takingexam[]
+  roles       roles?       @relation(fields: [roleId], references: [roleId], onDelete: NoAction, onUpdate: NoAction, map: "fk_users_roles")
 
   @@index([roleId], map: "fk_users_roles")
 }
@@ -53,15 +54,16 @@ model courses {
 }
 
 model exams {
-  examId    Int         @id @default(autoincrement())
-  examName  String      @db.VarChar(255)
-  userId    Int
-  courseId  Int
-  createdAt DateTime?   @default(now()) @db.Timestamp(0)
-  updatedAt DateTime?   @default(now()) @db.Timestamp(0)
-  courses   courses     @relation(fields: [courseId], references: [courseId], onDelete: NoAction, onUpdate: NoAction, map: "exams_ibfk_1")
-  users     users       @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "exams_ibfk_2")
-  questions questions[]
+  examId     Int          @id @default(autoincrement())
+  examName   String       @db.VarChar(255)
+  userId     Int
+  courseId   Int
+  createdAt  DateTime?    @default(now()) @db.Timestamp(0)
+  updatedAt  DateTime?    @default(now()) @db.Timestamp(0)
+  courses    courses      @relation(fields: [courseId], references: [courseId], onDelete: NoAction, onUpdate: NoAction, map: "exams_ibfk_1")
+  users      users        @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "exams_ibfk_2")
+  questions  questions[]
+  takingexam takingexam[]
 
   @@index([courseId], map: "courseId")
   @@index([userId], map: "userId")
@@ -90,4 +92,35 @@ model questiontypes {
   createdAt        DateTime?   @default(now()) @db.Timestamp(0)
   updatedAt        DateTime?   @default(now()) @db.Timestamp(0)
   questions        questions[]
+}
+
+model takingexam {
+  takingExamId Int       @id @default(autoincrement())
+  examId       Int
+  userId       Int
+  grade        Decimal?  @db.Decimal(5, 2)
+  createdAt    DateTime? @default(now()) @db.Timestamp(0)
+  updatedAt    DateTime? @default(now()) @db.Timestamp(0)
+  exams        exams     @relation(fields: [examId], references: [examId], onDelete: NoAction, onUpdate: NoAction, map: "takingexam_ibfk_1")
+  users        users     @relation(fields: [userId], references: [userId], onDelete: NoAction, onUpdate: NoAction, map: "takingexam_ibfk_2")
+
+  @@index([examId], map: "examId")
+  @@index([userId], map: "userId")
+}
+
+/// The underlying table does not contain a valid unique identifier and can therefore currently not be handled by Prisma Client.
+model vgames {
+  rank        Int?
+  name        String?  @db.Text
+  platform    String?  @db.Text
+  year        Int?
+  genre       String?  @db.Text
+  publisher   String?  @db.Text
+  NAsales     Decimal? @db.Decimal(10, 0)
+  EUsales     Decimal? @db.Decimal(10, 0)
+  JPsales     Decimal? @db.Decimal(10, 0)
+  othersales  Decimal? @db.Decimal(10, 0)
+  globalsales Decimal? @db.Decimal(10, 0)
+
+  @@ignore
 }

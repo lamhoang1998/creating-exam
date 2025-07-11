@@ -1,5 +1,4 @@
 import { useEffect, type ReactNode } from "react";
-import { useAppSelector } from "../../hooks";
 import { UserRole } from "../../types/auth.types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { getUserLoginInfo } from "../../helpers/auth.helper";
@@ -15,8 +14,6 @@ function RootPage({ children, allowRoles }: Props) {
 	const navigate = useNavigate();
 
 	const location = useLocation();
-
-	console.log("location", location);
 
 	useEffect(() => {
 		const currentRole = UserRole[loginData?.roleId as number];
