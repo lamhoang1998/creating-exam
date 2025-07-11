@@ -1,5 +1,5 @@
 import { Table, type TableProps } from "antd";
-import { useGetStudentQuery } from "../../common/queries/exams/exams.queries";
+import { useGetStudentQuery } from "../../common/queries/users/users.queries";
 import type { UserInfo } from "../../types/users.types";
 import { useNavigate } from "react-router-dom";
 

@@ -1,4 +1,4 @@
-import { Controller, Get, Req } from '@nestjs/common';
+import { Controller, Get, Query, Req } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { Request as ExpressRequest } from 'express-serve-static-core';
 
@@ -14,5 +14,10 @@ export class UsersController {
   @Get(`get-student`)
   getStudent() {
     return this.usersService.getStudents();
+  }
+
+  @Get(`get-student-details`)
+  getStudentsDetails(@Query() userId: number) {
+    return this.usersService.getStudentsDetail(userId);
   }
 }

@@ -8,6 +8,7 @@ export const ENDPOINT = {
 	USER: {
 		GETINFO: `user/getinfo`,
 		GETSTUDENT: `users/get-student`,
+		GETSTUDENTDETAILS: `users/get-student-details`,
 	},
 	UPLOAD: {
 		FILELOCAL: `upload/file-local`,

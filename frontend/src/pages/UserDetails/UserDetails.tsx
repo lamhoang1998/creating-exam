@@ -5,8 +5,6 @@ function UserDetails() {
 
 	const userId = Number(id as string);
 
-	console.log("userId", userId);
-
 	return <div>UserDetails</div>;
 }
 

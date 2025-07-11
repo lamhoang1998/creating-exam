@@ -29,4 +29,6 @@ export class UsersService {
 
     return students;
   }
+
+  async getStudentsDetail(userId: number) {}
 }
