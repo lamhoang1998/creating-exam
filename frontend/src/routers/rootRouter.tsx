@@ -11,6 +11,7 @@ import Answers from "../pages/Answers/Answers";
 import StudentLayout from "../layouts/StudentLayout/StudentLayout";
 import Courses from "../pages/Courses/Courses";
 import Grade from "../pages/Grade/Grade";
+import UserDetails from "../pages/UserDetails/UserDetails";
 
 const rootRouter = createBrowserRouter([
 	{
@@ -28,6 +29,7 @@ const rootRouter = createBrowserRouter([
 			{ path: "users", element: <User /> },
 			{ path: "exams", element: <Exams /> },
 			{ path: "answers", element: <Answers /> },
+			{ path: "details/:id", element: <UserDetails /> },
 		],
 	},
 	{

@@ -10,4 +10,9 @@ export class UsersController {
   async getUserInfo(@Req() req: Request & ExpressRequest) {
     return this.usersService.getUserInfo(req);
   }
+
+  @Get(`get-student`)
+  getStudent() {
+    return this.usersService.getStudents();
+  }
 }

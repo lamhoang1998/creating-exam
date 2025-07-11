@@ -20,4 +20,13 @@ export class UsersService {
 
     return userInfo;
   }
+
+  async getStudents() {
+    const students = await this.prisma.users.findMany({
+      where: { roleId: 2 },
+      omit: { password: true },
+    });
+
+    return students;
+  }
 }
