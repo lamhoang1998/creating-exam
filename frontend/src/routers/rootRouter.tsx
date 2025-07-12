@@ -3,7 +3,6 @@ import RootPage from "../pages/Rootpage/RootPage";
 import Login from "../pages/Login/Login";
 import DashBoard from "../pages/DashBoard/DashBoard";
 import Register from "../pages/Register/Register";
-import Home from "../pages/Home/Home";
 import AdminLayout from "../layouts/AdminLayout/AdminLayout";
 import User from "../pages/Users/User";
 import Exams from "../pages/Exams/Exams";

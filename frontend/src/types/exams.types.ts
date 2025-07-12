@@ -19,3 +19,8 @@ export type Answers = {
 export type Answer = {
 	text: string;
 };
+
+export type GiveExam = {
+	userId: number;
+	exam: string;
+};

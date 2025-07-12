@@ -15,5 +15,6 @@ export const ENDPOINT = {
 	},
 	EXAM: {
 		ADDEXAM: `exams/add-exam`,
+		GIVEEXAM: `exams/give-exam`,
 	},
 };
